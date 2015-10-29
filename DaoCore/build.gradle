@@ -16,7 +16,7 @@ if(isSnapshot) {
 }
 
 repositories {
-mavenLocal()
+//mavenLocal()
 
         maven {
             url this.snapshotURL
