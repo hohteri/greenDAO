@@ -25,8 +25,8 @@ import android.database.CrossProcessCursor;
 import android.database.Cursor;
 import android.database.CursorWindow;
 import android.database.DatabaseUtils;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteStatement;
+import org.sqlite.database.sqlite.SQLiteDatabase;
+import org.sqlite.database.sqlite.SQLiteStatement;
 import de.greenrobot.dao.identityscope.IdentityScope;
 import de.greenrobot.dao.identityscope.IdentityScopeLong;
 import de.greenrobot.dao.internal.DaoConfig;
@@ -767,8 +767,17 @@ public abstract class AbstractDao<T, K> {
         }
     }
 
+    private static final String[] countProjection = new String[]{"count(*)"};
+
     public long count() {
-        return DatabaseUtils.queryNumEntries(db, '\'' + config.tablename + '\'');
+        //return DatabaseUtils.queryNumEntries(db, '\'' + config.tablename + '\'');
+	Cursor cursor = db.query('\'' + config.tablename + '\'', countProjection, null, null, null, null, null);
+        try {
+            cursor.moveToFirst();
+            return cursor.getLong(0);
+        } finally {
+            cursor.close();
+        }
     }
 
     /** See {@link #getKey(Object)}, but guarantees that the returned key is never null (throws if null). */

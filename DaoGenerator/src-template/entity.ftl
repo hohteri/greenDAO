@@ -146,7 +146,7 @@ property>${property.javaTypeInEntity} ${property.propertyName}<#if property_has_
 -->
 <#list entity.toOneRelations as toOne>
     /** To-one relationship, resolved on first access. */
-    public ${toOne.targetEntity.className} get${toOne.name?cap_first}() {
+    public com.sstatzz.shared.model.${toOne.targetEntity.className} get${toOne.name?cap_first}() {
 <#if toOne.useFkProperty>
         ${toOne.fkProperties[0].javaType} __key = this.${toOne.fkProperties[0].propertyName};
         if (${toOne.name}__resolvedKey == null || <#--
@@ -182,6 +182,10 @@ property>${property.javaTypeInEntity} ${property.propertyName}<#if property_has_
     }
 </#if>
 
+    public void set${toOne.name?cap_first}(com.sstatzz.shared.model.${toOne.targetEntity.className} ${toOne.name}) {
+       set${toOne.name?cap_first}( (${toOne.targetEntity.className}) ${toOne.name});
+    }
+
     public void set${toOne.name?cap_first}(${toOne.targetEntity.className} ${toOne.name}) {
 <#if toOne.fkProperties[0].notNull>
         if (${toOne.name} == null) {
@@ -207,7 +211,7 @@ property>${property.javaTypeInEntity} ${property.propertyName}<#if property_has_
 -->
 <#list entity.toManyRelations as toMany>
     /** To-many relationship, resolved on first access (and after reset). Changes to to-many relations are not persisted, make changes to the target entity. */
-    public List<${toMany.targetEntity.className}> get${toMany.name?cap_first}() {
+    public List<com.sstatzz.shared.model.${toMany.targetEntity.className}> get${toMany.name?cap_first}() {
         if (${toMany.name} == null) {
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
@@ -222,7 +226,8 @@ property>${property.javaTypeInEntity} ${property.propertyName}<#if property_has_
                 }
             }
         }
-        return ${toMany.name};
+        List<com.sstatzz.shared.model.${toMany.targetEntity.className}> temp = ${entity.className}.UnsafeCastUtil.cast(${toMany.name});
+        return temp;
     }
 
     /** Resets a to-many relationship, making the next get call to query for a fresh result. */
@@ -267,4 +272,15 @@ property>${property.javaTypeInEntity} ${property.propertyName}<#if property_has_
 ${keepMethods!}    // KEEP METHODS END
 
 </#if>
+    static class UnsafeCastUtil {
+           private UnsafeCastUtil(){ /* not instatiable */}
+
+           /**
+           * Warning! Using this method is a sin against the gods of programming!
+           */
+           @SuppressWarnings("unchecked")
+           public static <T> T cast(Object o){
+                   return (T)o;
+           }
+    }
 }

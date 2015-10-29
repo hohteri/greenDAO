@@ -18,7 +18,7 @@ package de.greenrobot.dao.test;
 
 import android.app.Application;
 import android.app.Instrumentation;
-import android.database.sqlite.SQLiteDatabase;
+import org.sqlite.database.sqlite.SQLiteDatabase;
 import android.test.AndroidTestCase;
 import de.greenrobot.dao.DbUtils;
 
@@ -89,12 +89,21 @@ public abstract class DbTest extends AndroidTestCase {
 
     /** May be overriden by sub classes to set up a different db. */
     protected SQLiteDatabase createDatabase() {
-        if (inMemory) {
+        //if (inMemory) {
             return SQLiteDatabase.create(null);
-        } else {
+        /*} else {
             getContext().deleteDatabase(DB_NAME);
-            return getContext().openOrCreateDatabase(DB_NAME, 0, null);
-        }
+            int mode = 0;
+            File f = getContext().validateFilePath(DB_NAME, true);
+            int flags = SQLiteDatabase.CREATE_IF_NECESSARY;
+            if ((mode & getContext().MODE_ENABLE_WRITE_AHEAD_LOGGING) != 0) {
+                flags |= SQLiteDatabase.ENABLE_WRITE_AHEAD_LOGGING;
+            }
+            SQLiteDatabase db = SQLiteDatabase.openDatabase(f.getPath(), null, flags, null);
+            setFilePermissionsFromMode(f.getPath(), mode, 0);
+            return db;
+            //return getContext().openOrCreateDatabase(DB_NAME, 0, null);
+        }*/
     }
 
     @Override
