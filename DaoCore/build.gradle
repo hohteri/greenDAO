@@ -7,6 +7,11 @@ archivesBaseName = 'greendao-sqlite'
 version = '2.1.0-SNAPSHOT'
 sourceCompatibility = 1.6
 
+android {
+   compileSdkVersion 19
+   buildToolsVersion "19.1.0"
+}
+
 def isSnapshot = version.endsWith('-SNAPSHOT')
 def sonatypeRepositoryUrl
 if(isSnapshot) {
