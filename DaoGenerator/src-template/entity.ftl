@@ -183,6 +183,7 @@ property>${property.javaTypeInEntity} ${property.propertyName}<#if property_has_
 </#if>
 
     public void set${toOne.name?cap_first}(com.sstatzz.shared.model.${toOne.targetEntity.className} ${toOne.name}) {
+        super.set${toOne.name?cap_first}(${toOne.name});
        set${toOne.name?cap_first}( (${toOne.targetEntity.className}) ${toOne.name});
     }
 
