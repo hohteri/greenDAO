@@ -72,6 +72,11 @@ public class Property {
             property.notNull = true;
             return this;
         }
+        
+        public PropertyBuilder defaultValue(Object value) {
+            property.defaultValue = value;
+            return this;
+        }
 
         public PropertyBuilder index() {
             Index index = new Index();
@@ -152,6 +157,8 @@ public class Property {
     private String codeBeforeField;
     private String codeBeforeGetter;
     private String codeBeforeSetter;
+    
+    private Object defaultValue;
 
     private boolean primaryKey;
     private boolean pkAsc;
@@ -261,6 +268,10 @@ public class Property {
 
     public String getCodeBeforeSetter() {
         return codeBeforeSetter;
+    }
+    
+    public Object getDefaultValue() {
+        return defaultValue;
     }
 
     public String getDatabaseValueExpression() {

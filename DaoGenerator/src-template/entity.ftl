@@ -59,7 +59,11 @@ as ifc>${ifc}<#if ifc_has_next>, </#if></#list></#if> {
 <#if property.codeBeforeField ??>
      ${property.codeBeforeField}
 </#if>
+<#if property.defaultValue ??>
+private ${property.javaTypeInEntity} ${property.propertyName} = <#if property.javaTypeInEntity == 'String'>"</#if>${property.defaultValue}<#if property.javaTypeInEntity == 'String'>"</#if>;
+<#else>
     private ${property.javaTypeInEntity} ${property.propertyName};
+</#if>
 </#list>
 
 <#if entity.active>
