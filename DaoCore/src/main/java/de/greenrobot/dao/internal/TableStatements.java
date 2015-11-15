@@ -15,8 +15,8 @@
  */
 package de.greenrobot.dao.internal;
 
-import org.sqlite.database.sqlite.SQLiteDatabase;
-import org.sqlite.database.sqlite.SQLiteStatement;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 
 /** Helper class to create SQL statements for specific tables (used by greenDAO internally). */
 public class TableStatements {

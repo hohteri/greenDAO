@@ -24,7 +24,7 @@ import java.io.OutputStream;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
-import org.sqlite.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase;
 
 /** Database utils, for example to execute SQL scripts */
 // TODO add unit tests

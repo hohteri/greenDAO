@@ -15,7 +15,7 @@
  */
 package de.greenrobot.dao.query;
 
-import org.sqlite.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase;
 import de.greenrobot.dao.AbstractDao;
 
 /**

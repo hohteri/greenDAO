@@ -18,7 +18,7 @@ package de.greenrobot.dao.test;
 
 import android.app.Application;
 import android.app.Instrumentation;
-import org.sqlite.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase;
 import android.test.AndroidTestCase;
 import de.greenrobot.dao.DbUtils;
 
